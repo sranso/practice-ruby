@@ -28,4 +28,10 @@ describe '#next_palindrome' do
   it "should return the next smallest number that is greater than the given number which is a palindrome" do
     expect(next_palindrome(2129212)).to eq(2130312)
   end
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(999)).to eq(1001)
+  end
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(99)).to eq(101)
+  end
 end
