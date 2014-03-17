@@ -2,9 +2,9 @@ require 'debugger'
 # 1) Given a circular list of integers (when you reach the end of the list you come back to the beginning), what is the most efficient algorithm to find the smallest integer in the list?
 
 # For example: 
-circular_list = [22, 52, 66, 82, 5, 8, 12, 19]
-# go through each item in array, set it equal to var if it's smaller than the previous one
-# OR go through each item in the array until the current number is less than the previous number. at that point, you've reached the smallest item in the array
+# circular_list = [22, 52, 66, 82, 5, 8, 12, 19]
+  # go through each item in array, set it equal to var if it's smaller than the previous one
+  # OR go through each item in the array until the current number is less than the previous number. at that point, you've reached the smallest item in the array
   def find_smallest(list)
     count = 0
     while count < list.length
@@ -23,7 +23,16 @@ circular_list = [22, 52, 66, 82, 5, 8, 12, 19]
 # 2) Write a function that takes an integer and returns the smallest number that is greater than the given number which is a palendrome.
 
 # For example, if the input was 111 the next palindromic number would be 121.
-  
+  # 1221 => 1331
+  # 1991 => 2002
+  # 191 => 202
+  # 23932 => 24042
+  # 219912 => 220022
+  # 2199912 => 2200022
+  # if number is odd number of digits, find the middle int and increase it by one
+  # if number is even number of digits, find middle two ints and increase by one
+  # if the middle int is 9, then increase the ints to its left and right by one and make the middle int zero.
+  # if outer ints are 9 and inner int is 9, 
   
 # 3) The least common multiple of a set of integers is the smallest positive integer that is a multiple of all of the integers in the set.
 
