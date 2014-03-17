@@ -12,20 +12,20 @@ describe '#find_smallest' do
   end
 end
 
-describe '#next_palendrome' do
-  it "should return the next smallest number that is greater than the given number which is a palendrome" do
-    expect(next_palendrome(121)).to eq(131)
+describe '#next_palindrome' do
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(121)).to eq(131)
   end
-  it "should return the next smallest number that is greater than the given number which is a palendrome" do
-    expect(next_palendrome(1221)).to eq(1331)
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(1221)).to eq(1331)
   end
-  it "should return the next smallest number that is greater than the given number which is a palendrome" do
-    expect(next_palendrome(1991)).to eq(2002)
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(1991)).to eq(2002)
   end
-  it "should return the next smallest number that is greater than the given number which is a palendrome" do
-    expect(next_palendrome(2199912)).to eq(2200022)
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(2199912)).to eq(2200022)
   end
-  it "should return the next smallest number that is greater than the given number which is a palendrome" do
-    expect(next_palendrome(2129212)).to eq(2130312)
+  it "should return the next smallest number that is greater than the given number which is a palindrome" do
+    expect(next_palindrome(2129212)).to eq(2130312)
   end
 end

@@ -53,30 +53,30 @@ require 'debugger'
   #     return palendrome_string.to_i
   #   end
   # end
-  def next_palendrome(palendrome)
-    palendrome_string = palendrome.to_s
-    if palendrome_string.length.odd?
-      middle = palendrome_string.length/2
+  def next_palindrome(palindrome)
+    palindrome_string = palindrome.to_s
+    if palindrome_string.length.odd?
+      middle = palindrome_string.length/2
       middle_two = []
-      if palendrome_string[middle] == "9"
-        palendrome_string[middle] = "0"
+      if palindrome_string[middle] == "9"
+        palindrome_string[middle] = "0"
         middle_two = middle - 1, middle + 1
       else
-        palendrome_string[middle] = palendrome_string[middle].to_i.next.to_s
-        return palendrome_string.to_i
+        palindrome_string[middle] = palindrome_string[middle].to_i.next.to_s
+        return palindrome_string.to_i
       end
     else
-      middle_two = palendrome_string.length/2 - 1, palendrome_string.length/2
+      middle_two = palindrome_string.length/2 - 1, palindrome_string.length/2
     end
-    while palendrome_string[middle_two[0]].include? "9"
-      palendrome_string[middle_two[0]] = "0"
-      palendrome_string[middle_two[1]] = "0"
+    while palindrome_string[middle_two[0]].include? "9"
+      palindrome_string[middle_two[0]] = "0"
+      palindrome_string[middle_two[1]] = "0"
       middle_two = middle_two[0] - 1, middle_two[1] + 1
-      palendrome_string.to_i
+      palindrome_string.to_i
     end
-    palendrome_string[middle_two[0]] = palendrome_string[middle_two[0]].to_i.next.to_s
-    palendrome_string[middle_two[1]] = palendrome_string[middle_two[1]].to_i.next.to_s
-    return palendrome_string.to_i
+    palindrome_string[middle_two[0]] = palindrome_string[middle_two[0]].to_i.next.to_s
+    palindrome_string[middle_two[1]] = palindrome_string[middle_two[1]].to_i.next.to_s
+    return palindrome_string.to_i
   end
   
 # 3) The least common multiple of a set of integers is the smallest positive integer that is a multiple of all of the integers in the set.
