@@ -1,3 +1,5 @@
+# https://gist.github.com/robertjwhitney/bc68fa071606ba6fd3b8
+
 require 'debugger'
 # 1) Given a circular list of integers (when you reach the end of the list you come back to the beginning), what is the most efficient algorithm to find the smallest integer in the list?
 
@@ -18,38 +20,63 @@ require 'debugger'
   # if number is even number of digits, find middle two ints and increase by one
   # if the middle int is 9, then increase the ints to its left and right by one and make the middle int zero.
   # if outer ints are 9 and inner int is 9, 
+  # def next_palendrome(palendrome)
+  #   palendrome_string = palendrome.to_s
+  #   if palendrome_string.length.odd?
+  #     middle = palendrome_string.length/2
+  #     if palendrome_string[middle] == "9"
+  #       palendrome_string[middle] = "0"
+  #       neighbor_ints = middle - 1, middle + 1
+  #       while palendrome_string[neighbor_ints[0]].include? "9"
+  #         palendrome_string[neighbor_ints[0]] = "0"
+  #         palendrome_string[neighbor_ints[1]] = "0"
+  #         neighbor_ints = neighbor_ints[0] - 1, neighbor_ints[1] + 1
+  #         palendrome_string.to_i
+  #       end
+  #       palendrome_string[neighbor_ints[0]] = palendrome_string[neighbor_ints[0]].to_i.next.to_s
+  #       palendrome_string[neighbor_ints[1]] = palendrome_string[neighbor_ints[1]].to_i.next.to_s
+  #       return palendrome_string.to_i
+  #     else
+  #       palendrome_string[middle] = palendrome_string[middle].to_i.next.to_s
+  #     end
+  #     return palendrome_string.to_i
+  #   else
+  #     middle_two = palendrome_string.length/2 - 1, palendrome_string.length/2
+  #     while palendrome_string[middle_two[0]].include? "9"
+  #       palendrome_string[middle_two[0]] = "0"
+  #       palendrome_string[middle_two[1]] = "0"
+  #       middle_two = middle_two[0] - 1, middle_two[1] + 1
+  #       palendrome_string.to_i
+  #     end
+  #     palendrome_string[middle_two[0]] = palendrome_string[middle_two[0]].to_i.next.to_s
+  #     palendrome_string[middle_two[1]] = palendrome_string[middle_two[1]].to_i.next.to_s
+  #     return palendrome_string.to_i
+  #   end
+  # end
   def next_palendrome(palendrome)
     palendrome_string = palendrome.to_s
     if palendrome_string.length.odd?
       middle = palendrome_string.length/2
+      middle_two = []
       if palendrome_string[middle] == "9"
         palendrome_string[middle] = "0"
-        neighbor_ints = middle - 1, middle + 1
-        while palendrome_string[neighbor_ints[0]].include? "9"
-          palendrome_string[neighbor_ints[0]] = "0"
-          palendrome_string[neighbor_ints[1]] = "0"
-          neighbor_ints = neighbor_ints[0] - 1, neighbor_ints[1] + 1
-          palendrome_string.to_i
-        end
-        palendrome_string[neighbor_ints[0]] = palendrome_string[neighbor_ints[0]].to_i.next.to_s
-        palendrome_string[neighbor_ints[1]] = palendrome_string[neighbor_ints[1]].to_i.next.to_s
-        return palendrome_string.to_i
+        middle_two = middle - 1, middle + 1
       else
         palendrome_string[middle] = palendrome_string[middle].to_i.next.to_s
+        return palendrome_string.to_i
       end
-      return palendrome_string.to_i
     else
       middle_two = palendrome_string.length/2 - 1, palendrome_string.length/2
-      while palendrome_string[middle_two[0]].include? "9"
-        palendrome_string[middle_two[0]] = "0"
-        palendrome_string[middle_two[1]] = "0"
-        middle_two = middle_two[0] - 1, middle_two[1] + 1
-        palendrome_string.to_i
-      end
-      palendrome_string[middle_two[0]] = palendrome_string[middle_two[0]].to_i.next.to_s
-      palendrome_string[middle_two[1]] = palendrome_string[middle_two[1]].to_i.next.to_s
-      return palendrome_string.to_i
     end
+    while palendrome_string[middle_two[0]].include? "9"
+      palendrome_string[middle_two[0]] = "0"
+      palendrome_string[middle_two[1]] = "0"
+      middle_two = middle_two[0] - 1, middle_two[1] + 1
+      palendrome_string.to_i
+    end
+    palendrome_string[middle_two[0]] = palendrome_string[middle_two[0]].to_i.next.to_s
+    palendrome_string[middle_two[1]] = palendrome_string[middle_two[1]].to_i.next.to_s
+    return palendrome_string.to_i
   end
   
 # 3) The least common multiple of a set of integers is the smallest positive integer that is a multiple of all of the integers in the set.
