@@ -5,22 +5,7 @@ require 'debugger'
 # circular_list = [22, 52, 66, 82, 5, 8, 12, 19]
   # go through each item in array, set it equal to var if it's smaller than the previous one
   # OR go through each item in the array until the current number is less than the previous number. at that point, you've reached the smallest item in the array
-  # def find_smallest(list)
-  #   count = 0
-  #   while count < list.length
-  #     previous_int = list[-1]
-  #     list.each do |int|
-  #       if int < previous_int
-  #         return int
-  #       end
-  #       count += 1
-  #       previous_int = int
-  #       if count == list.length
-  #         return previous_int
-  #       end
-  #     end
-  #   end
-  # end
+  # OR just return the minimum...? is that 'cheating'?
 
   def find_smallest(list)
     return list.min
@@ -34,7 +19,37 @@ require 'debugger'
   # if the middle int is 9, then increase the ints to its left and right by one and make the middle int zero.
   # if outer ints are 9 and inner int is 9, 
   def next_palendrome(palendrome)
-    
+    palendrome_string = palendrome.to_s
+    if palendrome_string.length.odd?
+      middle = palendrome_string.length/2
+      if palendrome_string[middle] == "9"
+        palendrome_string[middle] = "0"
+        neighbor_ints = middle - 1, middle + 1
+        while palendrome_string[neighbor_ints[0]].include? "9"
+          palendrome_string[neighbor_ints[0]] = "0"
+          palendrome_string[neighbor_ints[1]] = "0"
+          neighbor_ints = neighbor_ints[0] - 1, neighbor_ints[1] + 1
+          palendrome_string.to_i
+        end
+        palendrome_string[neighbor_ints[0]] = palendrome_string[neighbor_ints[0]].to_i.next.to_s
+        palendrome_string[neighbor_ints[1]] = palendrome_string[neighbor_ints[1]].to_i.next.to_s
+        return palendrome_string.to_i
+      else
+        palendrome_string[middle] = palendrome_string[middle].to_i.next.to_s
+      end
+      return palendrome_string.to_i
+    else
+      middle_two = palendrome_string.length/2 - 1, palendrome_string.length/2
+      while palendrome_string[middle_two[0]].include? "9"
+        palendrome_string[middle_two[0]] = "0"
+        palendrome_string[middle_two[1]] = "0"
+        middle_two = middle_two[0] - 1, middle_two[1] + 1
+        palendrome_string.to_i
+      end
+      palendrome_string[middle_two[0]] = palendrome_string[middle_two[0]].to_i.next.to_s
+      palendrome_string[middle_two[1]] = palendrome_string[middle_two[1]].to_i.next.to_s
+      return palendrome_string.to_i
+    end
   end
   
 # 3) The least common multiple of a set of integers is the smallest positive integer that is a multiple of all of the integers in the set.
