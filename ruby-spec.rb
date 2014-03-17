@@ -4,9 +4,11 @@ describe '#find_smallest' do
   it "should return the smallest int in an array" do
     expect(find_smallest([22, 52, 66, 82, 5, 8, 12, 19])).to eq(5)
   end
-
   it "should return the smallest int in an array" do
-    expect(find_smallest([2, 52, 66, 82, 5, 8, 12, 1])).to eq(1)
+    expect(find_smallest([1, 3, 5, 9, 100])).to eq(1)
+  end
+  it "should return the smallest int in an array" do
+    expect(find_smallest([100, 33, 11, 9])).to eq(9)
   end
 end
 
