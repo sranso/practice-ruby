@@ -56,6 +56,28 @@ require 'debugger'
 # 3) The least common multiple of a set of integers is the smallest positive integer that is a multiple of all of the integers in the set.
 
 # Write a function that takes an array of integers and efficiently calculates and returns the LCM.
+  # find smallest multiple, and call smallest^n until that result is divisible by all the other multiples
+def least_common_multiple(*multiples) 
+  lcm = multiples.max
+  while !divisible?(lcm, multiples)
+    factor = 1
+    multiples.each do |first_multiple|
+      multiples.each do |second_multiple|
+        lcm = first_multiple * second_multiple * factor
+        return lcm if divisible?(lcm, multiples)
+      end
+      factor += 1
+    end
+  end
+end
+
+def divisible?(lcm, *multiples)
+  multiples[0].each do |multiple|
+    return false if lcm % multiple != 0
+  end
+  return true
+end
+# puts divisible?(12, [2, 3, 4])
 
 # 4) Explain the difference between a symbol and a string.
 
