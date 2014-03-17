@@ -77,9 +77,11 @@ def divisible?(lcm, *multiples)
   end
   return true
 end
-# puts divisible?(12, [2, 3, 4])
 
 # 4) Explain the difference between a symbol and a string.
+  # :symbol vs "string"
+  # strings are mutable, symbols are not. that said, ruby interpreter never knows what that string may hold in terms of data. so, every string needs to have its own place in memory. symbols on the other hand do not need to have more than one place in memory. this makes them more "efficient" space-wise and easier to find.
+  # http://www.robertsosinski.com/2009/01/11/the-difference-between-ruby-symbols-and-strings/
 
 # 5) What is the purpose of yield
 
@@ -92,12 +94,23 @@ end
 # 9) How can you define a custom Exception?
 
 # 10) What do controllers do in Rails?
+  # controllers are where objects are created so that they can be passed to views, and ultimately shown to the user. they are like 'middle men' between models and views.
 
 # 11) What is RESTful routing?
+  # a style of route construction that makes logical sense given the resources. typical restful routing looks like so, given the resource "pictures":
+    # GET /pictures => index, display all pictures
+    # GET /pictures/new => new, form to create new picture
+    # POST /pictures => create, create new picture
+    # GET /pictures/:id => show, show specific picture
+    # GET /pictures/:id/edit => edit, form to edit picture
+    # PATCH/PUT /pictures/:id => update, update picture
+    # DELETE /pictures/:id => delete, delete picture
 
 # 12) What is the purpose of a layout?
+  # the layout is helpful for creating DRY code. the layout sets up the basics for any view (doctype, html, scripts, etc), and then in its body, renders the different, more specific views.
 
 # 13) What is Rake?
+  # an internal domain specific language (dsl) programmed in ruby.
 
 # 14) What is Capistrano?
 
@@ -108,6 +121,7 @@ end
 # 17) What is interpolation?
 
 # 18) Reverse the string "question" in place.
+  # "question".reverse 
 
 # 19) Explain the difference between class and instance variables
 
@@ -118,6 +132,7 @@ end
 # 22) Explain "convention over configuration."
 
 # 23) What is ORM?
+  # object relational mapping. basically it's the way an application can access information in the database. an example of an ORM is activerecord.
 
 # 24) What is a session?
 
@@ -126,10 +141,16 @@ end
 # 26) What’s the difference between authorization and authentication?
 
 # 27) Explain this ruby idiom: y ||= z
+  # if y doesn't exist, set it equal to z. if y already exists, do nothing.
 
 # 28) What does self mean?
 
 # 29) Give me an example of recursion.
+  # def recursion(num)
+  #   num = num + 2
+  #   return true if num > 6
+  #   recursion(num)
+  # end
 
 # 30) How do redirect and render differ?
 
@@ -156,6 +177,7 @@ end
 # 41) What’s a partial? What’s it for, how many can you have?
 
 # 42) What is HTTP?
+  # 
 
 # 43) Explain the asset pipeline.
 
