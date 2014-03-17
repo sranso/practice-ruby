@@ -80,14 +80,27 @@ end
 
 # 4) Explain the difference between a symbol and a string.
   # :symbol vs "string"
-  # strings are mutable, symbols are not. that said, ruby interpreter never knows what that string may hold in terms of data. so, every string needs to have its own place in memory. symbols on the other hand do not need to have more than one place in memory. this makes them more "efficient" space-wise and easier to find.
+  # strings are mutable, symbols are not. that said, ruby interpreter never knows what that string may hold in terms of data. so, every string needs to have its own place in memory, and if it's not stored in a variable, ruby interpreter knows that it wont be used again, and marks it for destruction. symbols on the other hand do not need to have more than one place in memory, and are not marked for destruction. this makes them more "efficient" space-wise and easier to find.
   # http://www.robertsosinski.com/2009/01/11/the-difference-between-ruby-symbols-and-strings/
 
 # 5) What is the purpose of yield
+  # yield passes control from one method to another, basically saying 'go do this thing, and come back when you're done'.
+  # def example
+  #   puts 'in the method'
+  #   yield(1)
+  #   puts 'back in the method'
+  #   yield(2)
+  # end
+  # example { |i| puts 'in the block #{i}' }
 
 # 6) What is a Range?
+  # represents an interval, set of values w/ a start and end.
+  # ex: (1..6) is [1,2,3,4,5,6]
 
 # 7) What is the difference between ‘&&’, ‘and’ and ‘&’ operators?
+  # && - boolean operator, the logical and. requires both things on left and right to be true
+  # and - useful for chaining related operations together until one returns nil or false. same as && but with lower precedence.
+  # & - binary AND operator, but only defined on FalseClass, NilClass, and TrueClass.
 
 # 8) What is a module?
 
