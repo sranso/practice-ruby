@@ -169,26 +169,35 @@ end
 
 # 21) Write a method that turns the string "Hi my name is Bob" into "iH ym eman si boB"
   def reverse_string(string)
-    return string.split(" ").map do |word|
+    string.split(" ").map do |word|
       word.reverse
     end.join(" ")
   end
 
 # 22) Explain "convention over configuration."
+  # software design paradigm, seeks to decrease the number of decisions that developers need to make. makes a program simple w/o losing flexibility.
 
 # 23) What is ORM?
   # object relational mapping. basically it's the way an application can access information in the database. an example of an ORM is activerecord.
 
 # 24) What is a session?
+  # sessions save data across multiple requests, keep track of a certain state of a particular user.
+  # consists of a hash of values and a session id.
+  # http://guides.rubyonrails.org/security.html#what-are-sessions-questionmark
 
 # 25) What is a namespace?
+  # container for a set of identifiers. it allows a user to distinguish one var / instance / class / obj from another, and understand what it 'contains'
 
 # 26) What’s the difference between authorization and authentication?
+  # authorization - verifies what you are authorized to do
+  # authentication - verifies who you are
+  # http://www.cyberciti.biz/faq/authentication-vs-authorization/
 
 # 27) Explain this ruby idiom: y ||= z
   # if y doesn't exist, set it equal to z. if y already exists, do nothing.
 
 # 28) What does self mean?
+  # refers to the object that the method is being called upon. gives you access to the current object.
 
 # 29) Give me an example of recursion.
   # def recursion(num)
@@ -198,90 +207,164 @@ end
   # end
 
 # 30) How do redirect and render differ?
+  # redirect sends a request to another view. render shows a particular view
 
 # 31) Explain what ‘has_many’ is and what happens when it is run.
+  # specifies a one-to-many association. for example, a farmer has many pigs (and often implied, a pig belongs_to a farmer).
 
 # 32) What’s the difference between PUT and POST?
+  # both are used for creating. post is used to modify and update a resource. put is used to create a resource or overwrite it.
 
 # 33) Explain why in ruby nil.object_id is equal to 4.
+  # nil is an object created when the language initializes, and that object's id happens to always be 4
+  # (although when i run this in irb, i get 8??)
+ # 2.0.0-p353 :044 > nil.object_id
+ # => 8
 
 # 34) How would I revert to a previous commit?
+  # git checkout commit_id
 
 # 35) What are different types of joins in SQL?
+  # inner join - returns all rows when there is at least one match in both tables
+  # left join - returns all rows from the left table,a nd the matched rows from the right table
+  # right join - returns all rows from the right table, and the matched rows from the left table
+  # full join - returns all rows when there is a match in one of the tables
 
 # 36) What data structures are you familiar with?
+  # hashes, arrays, tries, binary lists, object
 
 # 37) Name every data type.
+  # constants, symbols, hashes, arrays, strings, numbers (ints and floats)
 
 # 38) What’s a foreign key?
+  # an id that references another object, points to the primary key in another table
 
 # 39) When do validations get called?
+  # validations are run before an object gets sent to the db (e.g. SQL INSERT and SQL UPDATE).
 
 # 40) What is eager loading?
+  # the mechanism for loading the associated records of the objects returned by model using as few queries possible.
+    # clients = Client.limit(10)
+    # clients.each do |client|
+    #   puts client.address.postcode
+    # end
+    # => 11 queries, vs
+    # clients = Client.includes(:address).limit(10)
+    # clients.each do |client|
+    #   puts client.address.postcode
+    # end
+    # => 2 queries
+
 
 # 41) What’s a partial? What’s it for, how many can you have?
+  # a way to break down the rendering process into more manageable chunks. for ex, if you want to display a form on a page, you could have the new.html file which renders _form.html partial
 
 # 42) What is HTTP?
-  # 
+  # hypertext transfer protocol. for ex, a client submits an http request message to the server, and the server provides resources such as html files, and returns a response to the client.
 
 # 43) Explain the asset pipeline.
+  # provides a framework to concatenate and minify or compress javascript and css assets. also allows these assets to be written in other languages like coffeescript, sass, erb.
 
 # 44) How does false differ from nil?
+  # every expression in ruby evaluates to an object, and every object has a boolean value. most ruby objects have the boolean value of true, and the only two objects that have a boolean value of false are false and nil objects.
+  # nil can be converted to an int (0) and false cannot.
+  # nil is returned with something does not occur, false is returned when something is wrong.
 
 # 45) What is Git and why would you use it?
+  # git is version control. people use it to keep track of changes made to a project, features added, etc. it's helpful when there are mutliple people working on a project.
+  # git is not github. github is a remote repository that holds commits from a git repository.
 
 # 46) What is a migration?
+  # a migration is a set of commands that create and destroy tables in the database. allow you to alter the database schema over time in a consistent and easy way.
 
 # 47) Explain the Rails request cycle.
+  # client sends a request to the server. rails checks to see if the qualifications for that request exist (looks in routes.rb, checks if the route (e.g. cnn.com) exists with that kind of request (e.g. GET)). if this passes, the route points the request to a controller, where the resources for the view are retrieved from the db (e.g. @stories = Stories.all). the request then heads to the server, evaluates the view into a string, and sends it back to the client, renders it on their browser.
 
 # 48) Given 1GB of memory, and a billion phone numbers; how do you sort them?
+  # probably in a trie.
 
 # 49) Say you had an app with users. How would you let them have followers?
+  # http://stackoverflow.com/questions/10807900/how-to-store-bidirectional-relationships-in-a-rdbms-like-mysql
+  # one of two ways..
+  # 1. create a table with both directions stored. for ex...
+    # user   follower
+    # 1      2
+    # 2      1
+  # 2. create table with only one direction stored in the db. for ex...
+    # user   follower
+    # 1      2
+    # 1      3
 
 # 50) What is the default Rails server? What are some others.
-
+  # localhost:3000. sinatra is on 9393 using shotgun. python is on 8000. you can also define your own server on rails using rails s -p 3001 (will start a server on port 3001).
+  
 # 51) What is the difference between a lambda, a block and a proc?
 # 02_javascript.mdMarkdown
+  # 
+  
 # 52) What are undefined and undeclared variables?
-
+  # 
+  
 # 53) What is a closure, and how/why would you use one?
-
+  # 
+  
 # 54) What's a typical use case for anonymous functions?
-
+  # 
+  
 # 55) Can you explain how inheritance works in JavaScript?
-
+  # 
+  
 # 56) When would you use document.write()?
-
+  # 
+  
 # 57) Explain AJAX in as much detail as possible
-
+  # 
+  
 # 58) Explain how JSONP works (and how it's not really AJAX)
-
+  # 
+  
 # 59) Describe event bubbling.
-
+  # 
+  
 # 60) What's the difference between an "attribute" and a "property"?
-
+  # 
+  
 # 61) Difference between document load event and document ready event?
-
+  # 
+  
 # 62) What is the difference between == and ===?
-
+  # 
+  
 # 63) Explain how you would get a query string parameter from the browser window's URL.
-
+  # 
+  
 # 64) Explain the same-origin policy with regards to JavaScript.
-
+  # 
+  
 # 65) Explain event delegation.
 # 03_html_css.mdMarkdown
+  # 
+  
 # 66) What's a doctype?
-
+  # 
+  
 # 67) Whats a css reset and what does it do?
-
+  # 
+  
 # 68) Name some HTML5 elements
-
+  # 
+  
 # 69) What is a css clearfix and how do you implement it?
-
+  # 
+  
 # 70) Name some of the different ways to specify font-size in css.
-
+  # 
+  
 # 71) How do you select the 3rd list-element in an unordered list with css?
-
+  # 
+  
 # 72) What are data-attributes good for?
-
+  # 
+  
 # 73) Describe the difference between cookies, sessionStorage and localStorage.
+  # 
