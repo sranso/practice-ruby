@@ -48,3 +48,9 @@ describe '#least_common_multiple' do
   end
 end
 
+describe '#reverse_string' do
+  it "should reverse a string" do
+    expect(reverse_string("Hi my name is Bob")).to eq("iH ym eman si boB")
+  end
+end
+

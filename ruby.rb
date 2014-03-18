@@ -103,8 +103,12 @@ end
   # & - binary AND operator, but only defined on FalseClass, NilClass, and TrueClass.
 
 # 8) What is a module?
+  # collection of classes, methods, and constants. two major benefits: 1. provide a namespace and prevent name clashes, 2. implement the mixin facility
 
 # 9) How can you define a custom Exception?
+  # def no_lies(what_you_said)
+  #   raise TypeError, 'you told a lie!' if what_you_said == false
+  # end
 
 # 10) What do controllers do in Rails?
   # controllers are where objects are created so that they can be passed to views, and ultimately shown to the user. they are like 'middle men' between models and views.
@@ -126,21 +130,49 @@ end
   # an internal domain specific language (dsl) programmed in ruby.
 
 # 14) What is Capistrano?
+  # http://capistranorb.com/
+  # remote server automation and deployment tool written in ruby. extends the Rake dsl with methods specific to running commands on() servers
 
 # 15) How do you create a has many through relationship?
+  # create three tables and models, say Pyhsician Appointment and Patient. the models, they could look like so:
+  # class Physician < ActiveRecord::Base
+  #   has_many :appointments
+  #   has_many :patients, through: :appointments
+  # end
+
+  # class Appointment < ActiveRecord::Base
+  #   belongs_to :patient
+  #   belongs_to :physician
+  # end
+
+  # class Patient < ActiveRecord::Base
+  #   has_many :appointments
+  #   has_many :physician, through: :appointments
+  # end
+
 
 # 16) What is fields_for used for?
+  # creates a scope around a specific model object. similar to form_for in that it yields a FormBuilder object associated w/ a particular model object to a block. 
+  # fields_for(record_name, record_object = nil, options = {}, &block)
 
 # 17) What is interpolation?
+  # allows ruby code to appear w/in a string
 
 # 18) Reverse the string "question" in place.
   # "question".reverse 
 
 # 19) Explain the difference between class and instance variables
+  # @@class variable is accessible on the class level of a method. @instance variables are accessible only to instances of the class.
 
 # 20) What is a mixin? What is the difference compared with classical inheritance?
+  # modules eliminate the need for multiple inheritence, providing a facility called a mixin. mixins provide a controlled way to add functionality to classes. for ex, one class can inherit methods from two different modules.
 
 # 21) Write a method that turns the string "Hi my name is Bob" into "iH ym eman si boB"
+  def reverse_string(string)
+    return string.split(" ").map do |word|
+      word.reverse
+    end.join(" ")
+  end
 
 # 22) Explain "convention over configuration."
 
