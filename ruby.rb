@@ -82,9 +82,11 @@ end
   # :symbol vs "string"
   # strings are mutable, symbols are not. that said, ruby interpreter never knows what that string may hold in terms of data. so, every string needs to have its own place in memory, and if it's not stored in a variable, ruby interpreter knows that it wont be used again, and marks it for destruction. symbols on the other hand do not need to have more than one place in memory, and are not marked for destruction. this makes them more "efficient" space-wise and easier to find.
   # http://www.robertsosinski.com/2009/01/11/the-difference-between-ruby-symbols-and-strings/
+    # if symbol is not marked by GC, where does it go / what happens to it
 
 # 5) What is the purpose of yield
   # yield passes control from one method to another, basically saying 'go do this thing, and come back when you're done'.
+  # allows you to section off parts of a method to perform whatever is most appropriate / what you need at the time
   # def example
   #   puts 'in the method'
   #   yield(1)
@@ -93,6 +95,17 @@ end
   # end
   # example { |i| puts 'in the block #{i}' }
 
+  # def example
+  #   puts 'in the original method'
+  #   yield
+  # end
+
+  # def say_hi
+  #   puts 'say hiiii'
+  # end
+
+  # example { say_hi }
+
 # 6) What is a Range?
   # represents an interval, set of values w/ a start and end.
   # ex: (1..6) is [1,2,3,4,5,6]
@@ -100,6 +113,7 @@ end
 # 7) What is the difference between ‘&&’, ‘and’ and ‘&’ operators?
   # && - boolean operator, the logical and. requires both things on left and right to be true
   # and - useful for chaining related operations together until one returns nil or false. same as && but with lower precedence.
+    # diff b/t && and and is exact (===) vs somewhat diff (==) (in js terms...)
   # & - binary AND operator, but only defined on FalseClass, NilClass, and TrueClass.
 
 # 8) What is a module?
@@ -127,14 +141,15 @@ end
   # the layout is helpful for creating DRY code. the layout sets up the basics for any view (doctype, html, scripts, etc), and then in its body, renders the different, more specific views.
 
 # 13) What is Rake?
-  # an internal domain specific language (dsl) programmed in ruby.
+  # http://rake.rubyforge.org/
+  # an internal domain specific language (dsl) programmed in ruby. emulates make, which is a C dsl. 
 
 # 14) What is Capistrano?
   # http://capistranorb.com/
   # remote server automation and deployment tool written in ruby. extends the Rake dsl with methods specific to running commands on() servers
 
 # 15) How do you create a has many through relationship?
-  # create three tables and models, say Pyhsician Appointment and Patient. the models, they could look like so:
+  # create three tables and models, say Pyhsician Appointment and Patient. the models would look like so (see below). a has_many through relationship keeps the foreign key in the through: table. so for the ex below, the appointment has the foreign key of the patient and the physician, creating the join / connection b/t the objects.
   # class Physician < ActiveRecord::Base
   #   has_many :appointments
   #   has_many :patients, through: :appointments
@@ -157,6 +172,8 @@ end
 
 # 17) What is interpolation?
   # allows ruby code to appear w/in a string
+    # interpolation = "an example of interpolation!"
+    # "this is #{interpolation}"
 
 # 18) Reverse the string "question" in place.
   # "question".reverse 
@@ -175,23 +192,23 @@ end
   end
 
 # 22) Explain "convention over configuration."
-  # software design paradigm, seeks to decrease the number of decisions that developers need to make. makes a program simple w/o losing flexibility.
+  # software design paradigm, seeks to decrease the number of decisions that developers need to make. makes a program simple w/o losing flexibility. basically stick with convention until / unless you really need to break from it.
 
 # 23) What is ORM?
   # object relational mapping. basically it's the way an application can access information in the database. an example of an ORM is activerecord.
 
 # 24) What is a session?
+  # http://guides.rubyonrails.org/security.html#what-are-sessions-questionmark
   # sessions save data across multiple requests, keep track of a certain state of a particular user.
   # consists of a hash of values and a session id.
-  # http://guides.rubyonrails.org/security.html#what-are-sessions-questionmark
 
 # 25) What is a namespace?
   # container for a set of identifiers. it allows a user to distinguish one var / instance / class / obj from another, and understand what it 'contains'
 
 # 26) What’s the difference between authorization and authentication?
+  # http://www.cyberciti.biz/faq/authentication-vs-authorization/
   # authorization - verifies what you are authorized to do
   # authentication - verifies who you are
-  # http://www.cyberciti.biz/faq/authentication-vs-authorization/
 
 # 27) Explain this ruby idiom: y ||= z
   # if y doesn't exist, set it equal to z. if y already exists, do nothing.
@@ -217,16 +234,13 @@ end
 
 # 33) Explain why in ruby nil.object_id is equal to 4.
   # nil is an object created when the language initializes, and that object's id happens to always be 4
-  # (although when i run this in irb, i get 8??)
- # 2.0.0-p353 :044 > nil.object_id
- # => 8
 
 # 34) How would I revert to a previous commit?
   # git checkout commit_id
 
 # 35) What are different types of joins in SQL?
   # inner join - returns all rows when there is at least one match in both tables
-  # left join - returns all rows from the left table,a nd the matched rows from the right table
+  # left join - returns all rows from the left table, and the matched rows from the right table
   # right join - returns all rows from the right table, and the matched rows from the left table
   # full join - returns all rows when there is a match in one of the tables
 
@@ -255,9 +269,8 @@ end
     # end
     # => 2 queries
 
-
 # 41) What’s a partial? What’s it for, how many can you have?
-  # a way to break down the rendering process into more manageable chunks. for ex, if you want to display a form on a page, you could have the new.html file which renders _form.html partial
+  # a way to break down the rendering process into more manageable chunks. for ex, if you want to display a form on a page, you could have the new.html.erb file which also renders _form.html.erb partial
 
 # 42) What is HTTP?
   # hypertext transfer protocol. for ex, a client submits an http request message to the server, and the server provides resources such as html files, and returns a response to the client.
@@ -268,25 +281,25 @@ end
 # 44) How does false differ from nil?
   # every expression in ruby evaluates to an object, and every object has a boolean value. most ruby objects have the boolean value of true, and the only two objects that have a boolean value of false are false and nil objects.
   # nil can be converted to an int (0) and false cannot.
-  # nil is returned with something does not occur, false is returned when something is wrong.
+  # nil is returned when something does not occur, false is returned when something is actually false.
 
 # 45) What is Git and why would you use it?
-  # git is version control. people use it to keep track of changes made to a project, features added, etc. it's helpful when there are mutliple people working on a project.
+  # git is a version control system. people use it to keep track of changes made to a project, features added, etc. it's helpful when there are mutliple people working on a project.
   # git is not github. github is a remote repository that holds commits from a git repository.
 
 # 46) What is a migration?
-  # a migration is a set of commands that create and destroy tables in the database. allow you to alter the database schema over time in a consistent and easy way.
+  # a migration is a set of commands that create and destroy tables in the database. migrations allow you to alter the database schema over time in a consistent and easy way.
 
 # 47) Explain the Rails request cycle.
-  # client sends a request to the server. rails checks to see if the qualifications for that request exist (looks in routes.rb, checks if the route (e.g. cnn.com) exists with that kind of request (e.g. GET)). if this passes, the route points the request to a controller, where the resources for the view are retrieved from the db (e.g. @stories = Stories.all). the request then heads to the server, evaluates the view into a string, and sends it back to the client, renders it on their browser.
+  # client sends a request to the server. rails checks to see if the qualifications for that request exist (looks in routes.rb, checks if the route (e.g. cnn.com) exists with that kind of request (e.g. GET)). if it does exist, the route points the request to a controller, where the resources for the view are retrieved from the db (e.g. @stories = Stories.all). the request then heads to the server, evaluates the view into a string, and sends it back to the client, renders it on their browser.
 
 # 48) Given 1GB of memory, and a billion phone numbers; how do you sort them?
-  # probably in a trie.
+  # probably in a trie..
 
 # 49) Say you had an app with users. How would you let them have followers?
   # http://stackoverflow.com/questions/10807900/how-to-store-bidirectional-relationships-in-a-rdbms-like-mysql
-  # one of two ways..
-  # 1. create a table with both directions stored. for ex...
+  # assuming that the followers could also be users, i'd store them one of two ways..
+  # 1. create a table with both directions stored. for ex, a user has the foreign key of a follower...
     # user   follower
     # 1      2
     # 2      1

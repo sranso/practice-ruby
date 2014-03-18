@@ -50,5 +50,8 @@
   
 // 64) Explain the same-origin policy with regards to JavaScript.
 //   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Same_origin_policy_for_JavaScript
+//  restricts how a document or script loaded from one origin can interact w a resource from another origin.
   
 // 65) Explain event delegation.
+//  allows you to avoid adding event listeners to specific nodes; instead, the event listener is added to one parent. that event listener analyzes bubbled events to find a match on child elements.
+//  http://davidwalsh.name/event-delegate
