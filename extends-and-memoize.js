@@ -1,6 +1,5 @@
 // MEMOIZE, caching something
-// generating ids for all the functions
-// "crazy closures"--allow for the vars / functions to live and behave the way we want them to. prevents gc from sweeping away, say, the var id (bc if 0 objects reference it, then gc will say goodbye to you)
+// generate ids for all the functions
 (function() {
   var id = 0;
 
@@ -13,15 +12,20 @@
 
     return newId;
   }
+
 })();
 
+// two *really* slow functions we want to memoize
 var slowFunction = function(x, y) {
   for (var i = 0; i < 10; i++) {
-    console.log(i);
+    i;
   };
   return x * y + 15;
 };
 var anotherSlowFunction = function(x, y) {
+  for (var i = 0; i < 5; i++) {
+    i;
+  };
   return x + y + 5;
 };
 
@@ -36,17 +40,23 @@ var memoize = function(fn) {
   // closure bc there is a var one level of scope outside of this func
   return function() {
     var keys = Array.prototype.slice.call(arguments);
-    var fnId = fn.id();
+    // var fnId = fn.id();
     
-    if (! answers[fnId]) {
-      answers[fnId] = {};
-    };
+    // if (! answers[fnId]) {
+    //   answers[fnId] = {};
+    // };
 
-    if (! answers[fnId][keys]) {
-      answers[fnId][keys] = fn.apply(this, arguments);
-    };
+    // if (! answers[fnId][keys]) {
+    //   answers[fnId][keys] = fn.apply(this, arguments);
+    // };
  
-    return answers[fnId][keys];
+    // return answers[fnId][keys];
+
+    if (! answers[keys]) {
+      answers[keys] = fn.apply(this, arguments);
+    };
+    console.log(answers);
+    return answers[keys];
   };
 };
 
@@ -61,6 +71,8 @@ console.log("time to make first call " + (afterFirst - beforeFirst) );
 var beforeSecond = new Date();
 memoizedSlowFunction(10, 2);
 console.log("time to make second call " + ( (new Date()) - beforeSecond ) );
+memoizedAnotherSlowFunction(10, 2);
+
 
 // EXTEND, transfer functionality from one method / class to another
 var Foo = function(name) {
