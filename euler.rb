@@ -26,7 +26,7 @@ def next_prime(prime)
   return prime
 end
 
-puts prime_factors(num)
+# puts prime_factors(num)
 
 # also, ruby has a class for this...
 # Prime.prime_division(num)
@@ -34,7 +34,24 @@ puts prime_factors(num)
 # ====================
 # A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 # Find the largest palindrome made from the product of two 3-digit numbers.
+def largest_palindrome_from_two_three_digit_nums
+  x = 100
+  y = 100
+  largest_product = 0
+  while x <= 999
+    while y <= 999
+      product = x * y
+      if product.to_s == product.to_s.reverse
+        largest_product = product if product > largest_product
+      end
+      y += 1
+    end
+    x += 1
+    y = x
+  end
+  return largest_product
+end
+puts largest_palindrome_from_two_three_digit_nums
 
-
-
+# 913*993=906609
 
