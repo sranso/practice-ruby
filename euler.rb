@@ -51,7 +51,29 @@ def largest_palindrome_from_two_three_digit_nums
   end
   return largest_product
 end
-puts largest_palindrome_from_two_three_digit_nums
-
+# puts largest_palindrome_from_two_three_digit_nums
 # 913*993=906609
+
+# 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+# What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+def smallest_positive
+  divisibles =* (1..19)
+  answer = 20
+  answer_not_found = true
+  while answer_not_found
+    divisibles.each do |num|
+      # debugger
+      if answer % num != 0
+        # debugger
+        answer += 20
+        break
+      end
+      # debugger
+      answer_not_found = false if num == 19
+    end
+  end
+  return answer
+end
+
+# puts smallest_positive
 
