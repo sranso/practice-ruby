@@ -1,4 +1,4 @@
-require './ruby'
+require './palindrome'
 
 describe '#find_smallest' do
   it "should return the smallest int in an array" do
