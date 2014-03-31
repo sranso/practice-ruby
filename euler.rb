@@ -62,13 +62,10 @@ def smallest_positive
   answer_not_found = true
   while answer_not_found
     divisibles.each do |num|
-      # debugger
       if answer % num != 0
-        # debugger
         answer += 20
         break
       end
-      # debugger
       answer_not_found = false if num == 19
     end
   end
