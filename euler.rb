@@ -102,4 +102,20 @@ end
 # puts difference
 
 # ====================
+# By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+# What is the 10001st prime number?
+
+def find_prime
+  num = 2
+  prime_count = 1
+  while prime_count < 10001
+    num += 1
+    if Prime.prime?(num)
+      prime_count += 1
+    end
+  end
+  return num
+end
+
+# puts find_prime
 
