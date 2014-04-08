@@ -356,10 +356,11 @@ def collatz
   longest_chain = 1
   longest_starting = 1
   starting_num = 1
+  cache = {1 => 1}
   while starting_num < 1000000
     n = starting_num
     chain = 1 # accounting for 1, the end of every chain
-    while n != 1
+    while (n != 1) && (n >= starting_num)
       if n.even?
         n = n/2
       else
@@ -367,10 +368,12 @@ def collatz
       end
       chain += 1
     end
+    chain += cache[n]
     if chain > longest_chain
       longest_chain = chain
       longest_starting = starting_num
     end
+    cache[starting_num] = chain
     starting_num += 1
   end
   return longest_starting
