@@ -359,7 +359,7 @@ def collatz
   cache = {1 => 1}
   while starting_num < 1000000
     n = starting_num
-    chain = 1 # accounting for 1, the end of every chain
+    chain = 0
     while (n != 1) && (n >= starting_num)
       if n.even?
         n = n/2
@@ -379,6 +379,41 @@ def collatz
   return longest_starting
 end
 
-puts collatz
+# puts collatz
+
+# ====================
+# Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
+
+# How many such routes are there through a 20×20 grid?
+def lattice
+  grid_size = 20
+  paths = 1
+  index = 0
+  while index < grid_size
+    paths *= (grid_size * 2) - index
+    paths /= index + 1
+    index += 1
+  end
+  return paths
+end
+# puts lattice
+
+# ====================
+# 215 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+# What is the sum of the digits of the number 21000?
+def sum_power
+  big_num = 2**1000
+  sum = 0
+  big_num.to_s.each_char do |digit|
+    sum += digit.to_i
+  end
+  return sum
+end
+# puts sum_power
+
+# ====================
+
+
 
 
