@@ -377,23 +377,31 @@ class Collatz
     CHAINS[self.starting_num] = self.chain
   end
 
-  def self.under_one_million
-    longest_chain = 1
-    longest_starting = 1
-    (2..999999).each do |n|
+end
+
+class Purveyor
+  attr_accessor :longest_starting, :longest_chain
+
+  def initialize
+    @longest_starting = 1
+    @longest_chain = 1
+  end
+
+  def under(num)
+    (2..num).each do |n|
       current = Collatz.new(n)
       current.set_chain
-      if current.chain > longest_chain
-        longest_chain = current.chain
-        longest_starting = current.starting_num
+      if current.chain > self.longest_chain
+        self.longest_chain = current.chain
+        self.longest_starting = current.starting_num
       end
     end
-    return longest_starting
+    return self.longest_starting
   end
 
 end
 
-puts Collatz.under_one_million
+puts Purveyor.new.under(1000000)
 
 # ====================
 # Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
