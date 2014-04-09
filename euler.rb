@@ -352,34 +352,48 @@ end
 
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
-def collatz
-  longest_chain = 1
-  longest_starting = 1
-  starting_num = 1
-  cache = {1 => 1}
-  while starting_num < 1000000
-    n = starting_num
-    chain = 0
-    while (n != 1) && (n >= starting_num)
+class Collatz
+  attr_accessor :chain
+  attr_reader :starting_num
+
+  CHAINS = {1 => 1}
+
+  def initialize(starting_num)
+    @starting_num = starting_num
+    @chain = 1
+  end
+
+  def set_chain
+    n = self.starting_num
+    while (n != 1) && (n >= self.starting_num)
       if n.even?
         n = n/2
       else
         n = 3*n + 1
       end
-      chain += 1
+      self.chain += 1
     end
-    chain += cache[n]
-    if chain > longest_chain
-      longest_chain = chain
-      longest_starting = starting_num
-    end
-    cache[starting_num] = chain
-    starting_num += 1
+    self.chain += CHAINS[n]
+    CHAINS[self.starting_num] = self.chain
   end
-  return longest_starting
+
+  def self.under_one_million
+    longest_chain = 1
+    longest_starting = 1
+    (2..999999).each do |n|
+      current = Collatz.new(n)
+      current.set_chain
+      if current.chain > longest_chain
+        longest_chain = current.chain
+        longest_starting = current.starting_num
+      end
+    end
+    return longest_starting
+  end
+
 end
 
-# puts collatz
+puts Collatz.under_one_million
 
 # ====================
 # Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
@@ -430,7 +444,7 @@ def letters_in_numbers
   return one_to_nine + ten_to_nineteen + twenty_to_ninetynine + hundredand + onehundred_to_nineninetynine + thousand
 end
 
-puts letters_in_numbers
+# puts letters_in_numbers
 
 
 

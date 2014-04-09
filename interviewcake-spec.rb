@@ -29,5 +29,18 @@ describe 'Stack' do
   end
 end
 
+describe 'Queue' do
+  describe '#enqueue' do
+    it 'should ' do
+
+    end
+  end
+  describe '#dequeue' do
+    it 'should ' do
+
+    end
+  end
+end
+
 
 

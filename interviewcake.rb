@@ -46,4 +46,40 @@ class Stack
 
 end
 
+class Queue
+  attr_reader :reading
+  attr_writer :writing
+  attr_accessor :bothing
+
+  def initialize
+    @reading = 'read'
+    @writing = 'write'
+    @bothing = 'both'
+  end
+
+  def what
+    puts reading
+    puts bothing
+    puts @writing
+  end
+
+  def write
+    reading = 'read it'
+    writing = 'write it'
+    bothing = 'both it'
+  end
+
+  def write_forril
+    @reading = 'read it'
+    self.writing = 'write it'
+    self.bothing = 'both it'
+  end
+
+
+end
+
+q = Queue.new
+q.write_forril
+q.what
+
 
