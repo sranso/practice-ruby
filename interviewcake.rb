@@ -1,4 +1,5 @@
 require 'debugger'
+# ==================
 class Array
 
   def my_reverse
@@ -9,9 +10,10 @@ class Array
   end
 
 end
-
+# ==================
 class Stack
-  attr_reader :history, :largest
+  attr_reader :largest
+  attr_accessor :history
 
   def initialize(num)
     @history = [num]
@@ -45,41 +47,31 @@ class Stack
   end
 
 end
-
+# ==================
 class Queue
-  attr_reader :reading
-  attr_writer :writing
-  attr_accessor :bothing
+  attr_accessor :stack1, :stack2
 
-  def initialize
-    @reading = 'read'
-    @writing = 'write'
-    @bothing = 'both'
+  def initialize(num)
+    @stack1 = Stack.new(num)
+    @stack2 = Stack.new(nil)
   end
 
-  def what
-    puts reading
-    puts bothing
-    puts @writing
+  def enqueue(num)
+    self.stack1.add(num)
+    return stack1.top
   end
 
-  def write
-    reading = 'read it'
-    writing = 'write it'
-    bothing = 'both it'
+  def dequeue
+    if self.stack2.history == [nil]
+      @stack2 = Stack.new(stack1.top)
+      self.stack2.history = Array.new(stack1.history.length)
+    end
+    (0..(self.stack1.history.length - 1)).each do |index|
+      self.stack1.history[index], self.stack2.history[-index - 1] = self.stack2.history[-index - 1], self.stack1.history[index]
+    end
+    self.stack1, self.stack2 = self.stack2, self.stack1
+    return self.stack1.top
   end
-
-  def write_forril
-    @reading = 'read it'
-    self.writing = 'write it'
-    self.bothing = 'both it'
-  end
-
-
 end
-
-q = Queue.new
-q.write_forril
-q.what
 
 
